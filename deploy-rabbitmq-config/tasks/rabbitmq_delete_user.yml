@@ -1,0 +1,5 @@
+---
+
+- name: 'BASH | delete User Padrao RABBITMQ.'
+  shell: "rabbitmqctl delete_user guest"
+  ignore_errors: yes

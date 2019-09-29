@@ -1,0 +1,15 @@
+---
+
+- name: 'BASH | Add User admin RABBITMQ.'
+  shell: "rabbitmqctl add_user {{ user }} {{ password }}"
+  ignore_errors: yes
+
+- name: 'BASH | Permissao User admin RABBITMQ.'
+  shell: "rabbitmqctl set_user_tags {{ user }} administrator"
+  ignore_errors: yes
+
+- name: 'BASH | Permissao User RABBITMQ.'
+  shell: "rabbitmqctl set_permissions -p / {{ user }}  \".*\" \".*\" \"*\""
+  ignore_errors: yes
+
+

@@ -1,0 +1,7 @@
+---
+- hosts: targets
+  remote_user: root
+  become: yes
+  roles:
+    - deploy-rabbitmq
+    - deploy-rabbitmq-config

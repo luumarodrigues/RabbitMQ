@@ -1,0 +1,60 @@
+---
+
+- name: 'BASH | copy dest:/tmp.'
+  copy:
+    src: "files/rabbitmq-server-3.7.15-1.el7.noarch.rpm"
+    dest: "/tmp/rabbitmq-server-3.7.15-1.el7.noarch.rpm"
+
+- name: 'YUM | RABBITMQ install.'
+  yum:
+    name: /tmp/rabbitmq-server-3.7.15-1.el7.noarch.rpm
+    state: present
+
+- name: 'default settings for RabbitMQ rabbitmq-defaults'
+  template:
+    src: "rabbitmq-defaults.j2"
+    dest: "/usr/lib/rabbitmq/lib/rabbitmq_server-3.7.15/sbin/rabbitmq-defaults"
+    owner: root
+    group: root
+    mode: 0755
+
+- name: 'BASH | Create /log RabbitMQ.'
+  file:
+    path: /rabbitmq/log
+    state: directory
+    owner: rabbitmq
+    group: rabbitmq
+    mode: '0755'  
+
+- name: 'BASH | Create /mnesia RabbitMQ.'
+  file:
+    path: "/rabbitmq/mnesia"
+    state: directory
+    owner: rabbitmq
+    group: rabbitmq
+    mode: '0755'
+  
+- name: 'BASH | Create /mnesia RabbitMQ.'
+  file:
+    path: "/etc/rabbitmq/"
+    state: directory
+    owner: rabbitmq
+    group: rabbitmq
+    mode: '0755'  
+  
+- name: 'BASH | Enable RABBITMQ Server Restartd.'
+  systemd:
+      name: "rabbitmq-server"
+      state: restarted 
+      enabled: yes
+
+
+- name: 'BASH | Enable RABBITMQ Management.'
+  shell: "rabbitmq-plugins enable rabbitmq_management"
+   
+
+- name: 'BASH | RABBITMQ Server Restartd.'
+  systemd:
+      name: "rabbitmq-server"
+      state: restarted
+   

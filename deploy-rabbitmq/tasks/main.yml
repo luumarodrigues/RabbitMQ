@@ -1,0 +1,6 @@
+---
+
+- include_tasks: rabbitmq_prereq.yml
+- include_tasks: rabbitmq_install.yml
+- include_tasks: rabbitmq_config.yml
+- include_tasks: rabbitmq_clusterConfig.yml

@@ -1,0 +1,5 @@
+---
+
+- include_tasks: rabbitmq_add_user.yml
+- include_tasks: rabbitmq_delete_user.yml
+- include_tasks: rabbitmq_config_fila.yml

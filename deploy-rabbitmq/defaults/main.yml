@@ -1,0 +1,17 @@
+---
+
+rabbitmq_erlang_cookie: "EAANDECMWRUOYGDIEDRL"
+
+rabbitmq_cluster_master: "cluster-rabbitmq"
+
+rabbitmq_plugins:
+  - rabbitmq_management
+  - rabbitmq_management_agent
+
+rabbitmq_use_longname: 'true'
+
+log_base: "/rabbitmq/log"
+
+mnesia_base: "/rabbitmq/mnesia"
+
+config_file: "/etc/rabbitmq"

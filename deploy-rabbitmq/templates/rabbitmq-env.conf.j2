@@ -1,0 +1,35 @@
+###############################
+# RABBITMQ SERVER CONFIGURATION
+#
+# All of the parameters below can also
+# be set as environment variables
+# using the prefix "RABBIT_"
+# i.e. export RABBITMQ_NODE_PORT=5672
+################################
+
+###########################
+# Defaults to the empty string
+# meaning bind to all network interfaces
+# Change to bind to one network interface only
+###########################
+# NODE_IP_ADDRESS=
+# NODE_PORT=5672
+
+###########################
+# Mac/Unix: rabbit@$HOSTNAME
+# The node name should be unique per erlang-node-and-machine combination
+# To run multiple nodes, see the clustering guide
+# ##########################
+#NODENAME=MyNodeName
+
+###########################
+# Unix/deb: /etc/rabbitmq/rabbitmq
+# If the configuration file is present it is used by the server
+# The .config extension is automatically appended
+# This file is also used to auto-configure RabbitMQ clusters
+# Example:
+# Config file location and new filename bunnies.config
+# CONFIG_FILE=/etc/rabbitmq/bunnies
+###########################
+CONFIG_FILE={{ config_file }}
+RABBITMQ_USE_LONGNAME={{ rabbitmq_use_longname }}

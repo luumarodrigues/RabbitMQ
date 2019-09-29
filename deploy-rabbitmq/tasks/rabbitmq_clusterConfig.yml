@@ -1,0 +1,22 @@
+---
+# Configure RabbitMQ for cluster
+
+- name: 'BASH | backup old erlang cookie.'
+  shell: cp -a /var/lib/rabbitmq/.erlang.cookie /var/lib/rabbitmq/.erlang.cookie.old
+  changed_when: false
+
+- name: 'BASH | updating rabbitmq erlang cookie'
+  template:
+    src: erlang.cookie.j2
+    dest: /var/lib/rabbitmq/.erlang.cookie
+    owner: rabbitmq
+    group: rabbitmq
+    mode: 0400
+
+- meta: flush_handlers
+
+- name: 'BASH | Stop RABBITMQ Server.'
+  systemd:
+      name: "rabbitmq-server"
+      state: restarted
+      

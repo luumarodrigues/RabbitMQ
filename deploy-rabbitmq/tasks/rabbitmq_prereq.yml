@@ -1,0 +1,24 @@
+---
+# Prereq install RabbitMQ
+
+- name: 'Hosts | Create Config File.'
+  lineinfile:
+    dest: /etc/hosts
+    line: "{{ hostvars[item]['ansible_default_ipv4']['address'] }} {{ hostvars[item]['ansible_hostname'] }}"
+  with_items: "{{ groups['all'] }}"    
+
+- name: 'Version | Python >=2.7'
+  shell: python --version
+  failed_when: false
+  changed_when: false
+  register: pytz_version
+
+- name: 'BASH | ERLANG.rpm copy dest:/tmp.'
+  copy:
+    src: "files/erlang-21.3.8.2-1.el7.x86_64.rpm"
+    dest: "/tmp/erlang-21.3.8.2-1.el7.x86_64.rpm"
+
+- name: 'YUM | ERLANG Install.'
+  yum:
+    name: /tmp/erlang-21.3.8.2-1.el7.x86_64.rpm
+    state: present
